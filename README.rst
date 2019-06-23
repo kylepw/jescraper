@@ -6,7 +6,7 @@ Simple script that scrapes Japanese or English translation results from various 
 
 Requirements
 ------------
-- Python 3.3+
+- Python 3.3+ or docker
 
 Usage
 -----
