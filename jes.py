@@ -6,7 +6,7 @@
 
     Usage:
         python3 jes.py [word]
-        
+
 """
 
 from bs4 import BeautifulSoup
@@ -15,11 +15,10 @@ import sys
 
 
 def scrape_alc(query=None):
-    url_template = 'https://eow.alc.co.jp/search?q=%s'
-
-    # Random example
     if not query:
-        query = 'missing'
+        return
+
+    url_template = 'https://eow.alc.co.jp/search?q=%s'
 
     url = url_template % query.replace(' ', '+')
 
@@ -59,15 +58,27 @@ def scrape_alc(query=None):
         # Sort by part of speech
         results.setdefault(pos_key, []).append(first_result.text)
 
-    print(query + '\n')
-    for pos, vals in results.items():
-        print(f'[{pos}]')
-        for v in vals:
-            print(v)
+    return results
+
+
+def print_data(query=None, data=None):
+    if not query or not data:
+        return
+
+    try:
+        print(query + '\n')
+        for pos, vals in data.items():
+            print(f'[{pos}]')
+            for v in vals:
+                print(v)
+    except (TypeError, AttributeError):
+        return
 
 
 if __name__ == '__main__':
     try:
-        scrape_alc(sys.argv[1])
+        query = sys.argv[1]
+        print_data(query, scrape_alc(query))
     except IndexError:
-        scrape_alc()
+        query = 'missing'
+        print_data(query, scrape_alc(query))
