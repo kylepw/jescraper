@@ -12,7 +12,7 @@ Usage
 -----
 ::
 
-    $ docker run -t --rm -e WORD="black friday" kylepw/jescraper
+    $ docker run -t --rm -e QUERY="black friday" kylepw/jescraper
     black friday
 
     [other]
