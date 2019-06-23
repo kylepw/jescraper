@@ -22,7 +22,14 @@ def scrape_alc(query=None):
 
     url = url_template % query.replace(' ', '+')
 
-    POS_KEYS = {'形': 'adj', '名': 'n', '動': 'v', '副': 'adv', '間投': 'interj'}
+    POS_KEYS = {
+        '形': 'adj',
+        '名': 'n',
+        '動': 'v',
+        '副': 'adv',
+        '間投': 'interj',
+        '著作': 'title',
+    }
 
     r = requests.get(url)
     r.raise_for_status()
